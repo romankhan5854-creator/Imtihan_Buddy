@@ -1,0 +1,71 @@
+# 📚 Imtihan Buddy
+
+An AI exam-practice app for Pakistani **Matric (Class 9–10)** and **Inter (Class 11–12)** students.
+
+Upload a chapter from **your own textbook** and the app will:
+
+1. **Create practice questions** from that chapter (MCQs, short and long questions).
+2. **Check your answers** against the chapter and give marks.
+3. **Explain** every answer in **English, Urdu (اردو) or Roman Urdu**.
+
+## Features
+
+- Upload a **PDF**, a **photo** (PNG/JPG) of a page, or a **.txt** file
+- Scanned books and Urdu PDFs are read with AI (OCR)
+- You can fix mistakes in the extracted text before making questions
+- Choose class, difficulty and number of MCQs / short / long questions
+- MCQs are marked by the app itself (always accurate); short and long answers are marked by AI using the chapter
+- Urdu text is shown right-to-left in a Nastaliq font
+- Retry the same questions or make new ones
+
+## Run on your computer
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+Get a free Gemini API key at <https://aistudio.google.com/apikey>, then either paste it in the sidebar when the app opens, or create a file `.streamlit/secrets.toml`:
+
+```toml
+GEMINI_API_KEY = "your-key-here"
+```
+
+> ⚠️ Never upload your API key or `secrets.toml` to GitHub.
+
+## Put it on GitHub (no coding tools needed)
+
+1. Sign in at <https://github.com> and click **+ → New repository**.
+2. Name it `imtihan-buddy`, choose **Public**, leave "Add a README" **unticked**, click **Create repository**.
+3. Click **uploading an existing file**.
+4. Drag in **`app.py`**, **`requirements.txt`** and **`README.md`** (all three must be at the top level, with exactly these names).
+5. Click **Commit changes**.
+
+## Deploy on Streamlit Community Cloud
+
+1. Go to <https://share.streamlit.io> and sign in with GitHub.
+2. Click **Create app → Deploy a public app from GitHub**.
+3. Pick your repository, branch `main`, and main file path `app.py`.
+4. Open **Advanced settings → Secrets** and paste:
+   ```toml
+   GEMINI_API_KEY = "your-key-here"
+   ```
+5. Click **Deploy**. After a minute or two you get a public link to share.
+
+To update the app later, edit a file on GitHub (pencil icon → Commit). Streamlit redeploys automatically.
+
+**Tip:** if you do *not* add `GEMINI_API_KEY` to Secrets, the app shows a box where each student pastes their own free key. That keeps your key and its free limit private.
+
+## Settings
+
+| Name | Where | Meaning |
+|------|-------|---------|
+| `GEMINI_API_KEY` | Secrets / environment | Your Google Gemini key |
+| `GEMINI_MODEL` | Secrets / environment (optional) | Model name. Default: `gemini-2.5-flash`. You can also change it under **Advanced** in the sidebar. |
+
+## Good to know
+
+- AI can make mistakes. Always check important facts in your textbook.
+- Only the first 60,000 characters of a chapter are used.
+- The free Gemini plan has limits. If you see "Free usage limit reached", wait a minute and try again.
+- Use your own textbooks and notes. Do not share copyrighted books publicly.
